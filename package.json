@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:server": "npm --prefix server run dev",
+    "dev:all": "concurrently -n web,api -c cyan,magenta \"npm run dev\" \"npm run dev:server\"",
+    "env:init": "cp -n .env.example .env 2>/dev/null; cp -n server/.env.example server/.env 2>/dev/null; true",
+    "setup": "npm install && npm --prefix server install && npm run env:init"
   },
   "dependencies": {
     "@google/genai": "^1.33.0",
@@ -21,6 +25,7 @@
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^9.1.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }
